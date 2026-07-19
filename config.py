@@ -28,7 +28,7 @@ class Settings:
    
     # Documents
 
-    INVENTORY_FILE: str = "documents/pharmacy_inventory_2000.csv"
+    INVENTORY_FILE: str = "documents/pharmacy_inventory.csv"
 
     POLICY_FILE: str = "documents/policy.txt"
 
