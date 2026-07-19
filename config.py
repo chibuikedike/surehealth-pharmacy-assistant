@@ -13,6 +13,8 @@ class Settings:
     # API Keys and LLM
 
     GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
+    if not GROQ_API_KEY:
+        raise ValueError("GROQ_API_KEY environment variable is not set")
 
     MODEL_NAME: str = "llama-3.1-8b-instant"
 
