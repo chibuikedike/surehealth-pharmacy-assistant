@@ -1,6 +1,6 @@
-# SureHealth Pharmacy Assistant
+# SureHealth Pharmacy Assistant 
 
-AI-powered pharmacy assistant built with Streamlit, Groq, and local pharmacy data.
+AI-powered pharmacy assistant built for pharmacy inventory management and operations.
 
 ## Overview
 
