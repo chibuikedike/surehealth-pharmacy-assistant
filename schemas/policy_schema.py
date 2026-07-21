@@ -4,7 +4,7 @@ SEARCH_POLICY_SCHEMA = {
         "name": "search_policy",
         "description": (
             "Search the pharmacy policy document for information about "
-            "store procedures, dispensing rules, returns, refunds, "
+            "store procedures, contact information, dispensing rules, returns, refunds, "
             "inventory management, customer service, suppliers, or "
             "other operational policies."
         ),
