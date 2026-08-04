@@ -127,8 +127,6 @@ The current inventory dataset is synthetic and randomly generated for demo and t
 
 ## Future Improvements
 
-- Add a `requirements.txt`
-- Pin package versions
 - Add automated tests
 - Support richer inventory filters
 - Improve policy retrieval with semantic search
@@ -136,4 +134,4 @@ The current inventory dataset is synthetic and randomly generated for demo and t
 
 ## License
 
-Add your preferred license here.
+This project is licensed under the MIT License.
