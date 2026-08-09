@@ -128,8 +128,9 @@ The current inventory dataset is synthetic and randomly generated for demo and t
 ## Future Improvements
 
 - Add automated tests
+- Add guardrails 
 - Support richer inventory filters
-- Improve policy retrieval with semantic search
+- Improve retrieval with RAG architecture
 - Add admin tools for document or inventory updates
 
 ## License
