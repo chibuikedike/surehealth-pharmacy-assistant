@@ -1,8 +1,0 @@
-# Optional dependencies for the experimental retrieval/vector-store script
-# Used by: data/store_data.py
-
-langchain-community
-langchain-text-splitters
-langchain-core
-langchain-huggingface
-chromadb
