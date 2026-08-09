@@ -39,9 +39,6 @@ def load_css() -> None:
             visibility: hidden;
         }
 
-        header {
-            visibility: hidden;
-        }
 
         .block-container {
             padding-top: 2rem;
