@@ -107,6 +107,9 @@ class LLMService:
                 self.registry.get_all_schemas()
             )
             request["tool_choice"] = "auto"
+            import pprint
+
+            pprint.pp(request["tools"])
 
         return self.client.chat.completions.create(
             **request
