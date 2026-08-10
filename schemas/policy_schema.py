@@ -4,7 +4,7 @@ SEARCH_POLICY_SCHEMA = {
         "name": "search_policy",
         "description": (
             "Search the pharmacy policy document for information about "
-            "store procedures, contact information, dispensing rules, returns, refunds, "
+            "store procedures, store ownership, contact information, dispensing rules, returns, refunds, "
             "inventory management, customer service, suppliers, or "
             "other operational policies."
         ),
@@ -22,8 +22,8 @@ SEARCH_POLICY_SCHEMA = {
                     "description": (
                         "Maximum number of matching policy sections to return."
                     ),
-                    "default": 5,
-                    "minimum": 1
+                    "default": 10,
+                    "minimum": 5
                 }
             },
             "required": []
