@@ -22,8 +22,8 @@ SEARCH_POLICY_SCHEMA = {
                     "description": (
                         "Maximum number of matching policy sections to return."
                     ),
-                    "default": 5,
-                    "minimum": 1
+                    "default": 10,
+                    "minimum": 5
                 }
             },
             "required": []
