@@ -20,7 +20,7 @@ class PolicyTool:
     def search_policy(
         self,
         query: str | None = None,
-        limit: int = 1,
+        limit: int = 5,
     ):
         """
         Search the pharmacy policy document.
