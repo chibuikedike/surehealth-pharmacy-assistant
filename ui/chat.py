@@ -59,7 +59,7 @@ def get_user_prompt() -> str | None:
     """
 
     return st.chat_input(
-        "Ask about inventory, pharmacy policies or medicines..."
+        "Ask about inventory or pharmacy policies "
     )
 
 
