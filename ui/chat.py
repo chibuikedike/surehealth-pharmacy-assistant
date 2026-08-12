@@ -1,9 +1,13 @@
+from pathlib import Path
 from __future__ import annotations
 import streamlit as st
 from models.chat_session import ChatSession
 from ui.layout import render_welcome
 
+BASE_DIR = Path(__file__).resolve().parent
 
+USER_AVATAR = BASE_DIR / "assets" / "user.png"
+ASSISTANT_AVATAR = BASE_DIR / "assets" / "surehealth.png"
 # ==========================================================
 # History
 # ==========================================================
@@ -29,10 +33,10 @@ def display_history(
             continue
 
         if message.role == "user":
-            avatar = "assets/user.png"
+            avatar = str(USER_AVATAR)
 
         elif message.role == "assistant":
-            avatar = "assets/surehealth.png"
+            avatar = str(ASSISTANT_AVATAR)
 
         else:
             avatar = None
