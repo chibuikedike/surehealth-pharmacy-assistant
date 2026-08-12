@@ -135,7 +135,7 @@ def render_footer() -> None:
     st.markdown(
         """
         <div class="footer">
-           SureHealth Pharmacy Ltd • Powered by Groq + Llama 3.1 
+           SureHealth Pharmacy Ltd • Powered by Groq  
         </div>
         """,
         unsafe_allow_html=True,
