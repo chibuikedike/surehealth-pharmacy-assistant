@@ -2,13 +2,27 @@ SEARCH_INVENTORY_SCHEMA = {
     "type": "function",
     "function": {
         "name": "search_inventory",
-        "description": "Search the pharmacy inventory.",
+        "description": (
+            "Search the pharmacy inventory for a specific medication, "
+            "product, SKU, brand, strength, dosage form, supplier, "
+            "warehouse location, or batch number. "
+            "Only use this tool when the user provides a specific "
+            "search term or clearly requests an inventory search. "
+            "Do not use this tool for vague queries such as 'drug', "
+            "'medicine', 'medication', 'products', 'stock', or "
+            "'inventory'. Ask the user to provide a specific medication "
+            "or product when the request is too broad."
+        ),
         "parameters": {
             "type": "object",
             "properties": {
                 "query": {
                     "type": "string",
-                    "description": "Medication name or search text."
+                    "description": (
+                        "A specific medication name, product name, "
+                        "SKU, brand, strength, dosage form, supplier, "
+                        "warehouse location, or batch number to search for."
+                    )
                 }
             },
             "required": ["query"]
