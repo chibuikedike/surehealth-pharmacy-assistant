@@ -16,11 +16,11 @@ class Settings:
     if not GROQ_API_KEY:
         raise ValueError("GROQ_API_KEY environment variable is not set")
 
-    MODEL_NAME: str = "llama-3.1-8b-instant"
+    MODEL_NAME: str = "openai/gpt-oss-120b"
 
     TEMPERATURE: float = 0.2
 
-    MAX_TOKENS: int = 1024
+    MAX_TOKENS: int = 2048
 
     # Prompt Files
 
