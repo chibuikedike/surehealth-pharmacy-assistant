@@ -1,11 +1,48 @@
 from pathlib import Path
+import re
+
 from models.document_chunk import DocumentChunk
 
 
 class PolicyService:
     """
-    Loads, chunks, and searches pharmacy policy documents.
+    Loads, chunks, and searches the pharmacy policy document.
     """
+
+    STOP_WORDS = {
+        "a",
+        "an",
+        "the",
+        "is",
+        "are",
+        "was",
+        "were",
+        "of",
+        "to",
+        "for",
+        "in",
+        "on",
+        "at",
+        "and",
+        "or",
+        "what",
+        "which",
+        "how",
+        "does",
+        "do",
+        "can",
+        "could",
+        "would",
+        "should",
+        "i",
+        "we",
+        "our",
+        "your",
+        "me",
+        "please",
+        "tell",
+        "about",
+    }
 
     def __init__(self, policy_file: str):
         self._policy_file = Path(policy_file)
@@ -25,24 +62,85 @@ class PolicyService:
         limit: int = 5,
     ) -> list[DocumentChunk]:
         """
-        Search the policy document using keyword matching.
+        Search the policy document using keyword matching
+        and relevance scoring.
         """
 
         if not query:
             return self._chunks[:limit]
 
-        query = query.lower()
+        query = query.strip().lower()
 
-        matches = []
+        if not query:
+            return []
+
+        keywords = self._extract_keywords(query)
+
+        if not keywords:
+            return []
+
+        scored_chunks = []
 
         for chunk in self._chunks:
-            if query in chunk.text.lower():
-                matches.append(chunk)
 
-            if len(matches) >= limit:
-                break
+            searchable_text = (
+                chunk.searchable_text.lower()
+            )
 
-        return matches
+            score = 0
+
+            # ------------------------------------------
+            # Keyword matching
+            # ------------------------------------------
+
+            for keyword in keywords:
+
+                occurrences = searchable_text.count(
+                    keyword
+                )
+
+                score += occurrences
+
+            # ------------------------------------------
+            # Exact phrase bonus
+            # ------------------------------------------
+
+            if query in searchable_text:
+                score += 5
+
+            # ------------------------------------------
+            # Title bonus
+            # ------------------------------------------
+
+            title = chunk.title.lower()
+
+            for keyword in keywords:
+                if keyword in title:
+                    score += 3
+
+            # ------------------------------------------
+            # Keep relevant chunks
+            # ------------------------------------------
+
+            if score > 0:
+                scored_chunks.append(
+                    (score, chunk)
+                )
+
+        # ----------------------------------------------
+        # Highest relevance first
+        # ----------------------------------------------
+
+        scored_chunks.sort(
+            key=lambda item: item[0],
+            reverse=True,
+        )
+
+        return [
+            chunk
+            for score, chunk
+            in scored_chunks[:limit]
+        ]
 
     def get_policy(self) -> str:
         """
@@ -61,8 +159,10 @@ class PolicyService:
                 f"Policy file not found: {self._policy_file}"
             )
 
-        self._document_text = self._policy_file.read_text(
-            encoding="utf-8"
+        self._document_text = (
+            self._policy_file.read_text(
+                encoding="utf-8"
+            )
         )
 
         self._chunks = self._chunk_document(
@@ -70,7 +170,33 @@ class PolicyService:
         )
 
     # ==================================================
-    # Private Methods
+    # Keyword Processing
+    # ==================================================
+
+    def _extract_keywords(
+        self,
+        query: str,
+    ) -> list[str]:
+        """
+        Extract meaningful keywords from a query.
+        """
+
+        words = re.findall(
+            r"\b[a-zA-Z0-9]+\b",
+            query,
+        )
+
+        keywords = [
+            word
+            for word in words
+            if word not in self.STOP_WORDS
+            and len(word) > 1
+        ]
+
+        return list(dict.fromkeys(keywords))
+
+    # ==================================================
+    # Document Chunking
     # ==================================================
 
     def _chunk_document(
@@ -78,27 +204,116 @@ class PolicyService:
         text: str,
     ) -> list[DocumentChunk]:
         """
-        Split a document into searchable chunks.
+        Convert the policy document into structured
+        searchable chunks.
 
-        Each paragraph becomes one chunk.
+        Each major policy heading becomes a chunk.
         """
 
-        paragraphs = [
-            paragraph.strip()
-            for paragraph in text.split("\n\n")
-            if paragraph.strip()
-        ]
+        lines = text.splitlines()
 
-        return [
-            DocumentChunk(
-                id=index,
-                text=paragraph,
+        chunks = []
+
+        current_section = ""
+        current_title = ""
+        current_content = []
+
+        chunk_id = 1
+
+        def save_chunk():
+            nonlocal chunk_id
+            nonlocal current_content
+
+            content = "\n".join(
+                current_content
+            ).strip()
+
+            if not content:
+                return
+
+            chunks.append(
+                DocumentChunk(
+                    id=chunk_id,
+                    section=current_section,
+                    title=current_title,
+                    text=content,
+                )
             )
-            for index, paragraph in enumerate(
-                paragraphs,
-                start=1,
+
+            chunk_id += 1
+            current_content = []
+
+        for line in lines:
+
+            stripped = line.strip()
+
+            if not stripped:
+                continue
+
+            # ------------------------------------------
+            # Major SECTION heading
+            # ------------------------------------------
+
+            if stripped.startswith("# SECTION "):
+
+                save_chunk()
+
+                current_section = stripped.lstrip(
+                    "# "
+                )
+
+                current_title = ""
+
+                continue
+
+            # ------------------------------------------
+            # Numbered policy heading
+            # ------------------------------------------
+
+            if re.match(
+                r"^#{1,6}\s+\d+\.\d+",
+                stripped,
+            ):
+
+                save_chunk()
+
+                current_title = stripped.lstrip(
+                    "# "
+                )
+
+                continue
+
+            # ------------------------------------------
+            # Other headings
+            # ------------------------------------------
+            
+            if stripped.startswith("#"):
+
+                heading = stripped.lstrip(
+                    "# "
+                )
+
+                if current_title:
+                    current_content.append(
+                        heading
+                    )
+                else:
+                    current_title = heading
+
+                continue
+
+            # ------------------------------------------
+            # Normal content
+            # ------------------------------------------
+
+            current_content.append(
+                stripped
             )
-        ]
+
+        # Save final chunk
+        save_chunk()
+
+        return chunks
 
     # ==================================================
     # Properties
