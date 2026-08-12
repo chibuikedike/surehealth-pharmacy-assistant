@@ -59,7 +59,7 @@ def render_sidebar(
         st.subheader("About")
 
         st.caption(
-            "Powered by Groq + Llama 3.1"
+            "Powered by Groq "
         )
 
         st.caption(
