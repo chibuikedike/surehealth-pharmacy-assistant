@@ -28,8 +28,19 @@ def display_history(
         ):
             continue
 
-        with st.chat_message(message.role):
+        if message.role == "user":
+            avatar = "assets/user.png"
 
+        elif message.role == "assistant":
+            avatar = "assets/surehealth.png"
+
+        else:
+            avatar = None
+
+        with st.chat_message(
+            message.role,
+            avatar=avatar,
+        ):
             if message.content:
                 st.markdown(message.content)
 
