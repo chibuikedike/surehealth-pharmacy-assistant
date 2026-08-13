@@ -1,7 +1,7 @@
 from pathlib import Path
 import streamlit as st
 
-base_dir = Path(__file__).resolve().parent.parent
+base_dir = Path(__file__).resolve().parent
 logo_path = base_dir / "assets" / "surehealth.png"
 
 # ==========================================================
