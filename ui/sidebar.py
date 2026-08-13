@@ -1,11 +1,14 @@
 
 from __future__ import annotations
-
+from pathlib import Path
 import streamlit as st
 
 from models.chat_session import ChatSession
 
 
+
+base_dir = Path(__file__).resolve().parent
+logo_path = base_dir / "assets" / "surehealth.png"
 
 
 # ==========================================================
@@ -21,10 +24,27 @@ def render_sidebar(
         "selected_example": None,
     }
 
+    logo_base64 = base64.b64encode(
+        logo_path.read_bytes()
+    ).decode()
+
     with st.sidebar:
 
-        st.title("⚕️ SureHealth Pharmacy Assistant")
+        st.markdown(
+            f"""
+            <div class="sidebar-header">
+                <img
+                    src="data:image/png;base64,{logo_base64}"
+                    class="sidebar-logo"
+                >
 
+                <div class="sidebar-title">
+                    SureHealth Pharmacy Assistant
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
         st.caption(
             "Inventory • Policies • References"
         )
