@@ -34,6 +34,10 @@ def load_css() -> None:
         """
         <style>
 
+        /* ==================================================
+           Streamlit UI
+           ================================================== */
+
         #MainMenu {
             visibility: hidden;
         }
@@ -46,24 +50,43 @@ def load_css() -> None:
             padding-top: 2rem;
             padding-bottom: 2rem;
             max-width: 1200px;
-            overflow: visible;
+            overflow: visible !important;
         }
-      
-        
+
+
+        /* ==================================================
+           Application Header
+           ================================================== */
+
         .app-header {
             display: flex;
             align-items: center;
             gap: 18px;
             width: 100%;
+            padding: 10px 0;
+            margin: 0;
+            overflow: visible !important;
         }
-        
+
+
+        /* ==================================================
+           Logo
+           ================================================== */
+
         .app-logo {
-            width: 70px;
-            height: 70px;
-            object-fit: contain;
+            width: 70px !important;
+            height: 70px !important;
+            object-fit: contain !important;
+            display: block !important;
             flex-shrink: 0;
+            overflow: visible !important;
         }
-        
+
+
+        /* ==================================================
+           Title
+           ================================================== */
+
         .app-title {
             font-size: 2.2rem;
             font-weight: 700;
@@ -71,24 +94,38 @@ def load_css() -> None:
             margin: 0;
             padding: 0;
         }
-        
-       @media (max-width: 768px) {
-            .app-title {
-                font-size: 1.35rem;
-                white-space: nowrap;
+
+
+        /* ==================================================
+           Mobile
+           ================================================== */
+
+        @media (max-width: 768px) {
+
+            .app-header {
+                gap: 12px;
+                padding: 10px 0;
+                overflow: visible !important;
             }
-          }
-        
+
             .app-logo {
-                width: 60px;
-                height: 60px;
+                width: 60px !important;
+                height: 60px !important;
             }
-        
+
             .app-title {
                 font-size: 1.7rem;
                 line-height: 1.15;
+                white-space: normal;
             }
-       
+
+        }
+
+
+        /* ==================================================
+           Footer
+           ================================================== */
+
         .footer {
             text-align: center;
             color: gray;
@@ -96,11 +133,11 @@ def load_css() -> None:
             padding-bottom: 10px;
             font-size: 0.85rem;
         }
+
         </style>
         """,
         unsafe_allow_html=True,
     )
-
 
 # ==========================================================
 # Header
