@@ -6,6 +6,7 @@ from models.chat_message import ChatMessage
 from models.llm_response import LLMResponse
 from tools.tool_registry import ToolRegistry
 from services.memory_service import MemoryService
+from tools.tool_validator import ToolValidator
 
 
 class LLMService:
@@ -27,6 +28,7 @@ class LLMService:
     ):
         self.settings = settings
         self.registry = tool_registry
+        self.validator = ToolValidator()
 
         self.client = Groq(
             api_key=self.settings.GROQ_API_KEY
@@ -237,23 +239,36 @@ class LLMService:
 
         return final_response.content or ""
 
-    def _run_tool(
-        self,
-        tool_call,
-    ):
-        """
-        Execute a single tool.
-        """
+   def _run_tool(
+    self,
+    tool_call,
+):
+    tool_name = tool_call.function.name
 
-        tool = self.registry.get(
-            tool_call.function.name
-        )
+    tool = self.registry.get(tool_name)
 
-        arguments = self._parse_tool_arguments(
-            tool_call
-        )
+    arguments = self._parse_tool_arguments(
+        tool_call
+    )
 
-        return tool(**arguments)
+    is_valid, reason = self.validator.validate(
+        tool_name,
+        arguments,
+    )
+
+    if not is_valid:
+        return {
+            "success": False,
+            "error": reason,
+            "tool": tool_name,
+        }
+
+    result = tool(**arguments)
+
+    return {
+        "success": True,
+        "data": result,
+    }
 
     # -----------------------------------------------------
 
