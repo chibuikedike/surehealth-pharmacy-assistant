@@ -1,5 +1,8 @@
 import streamlit as st
+BASE_DIR = Path(__file__).resolve().parent
 
+USER_AVATAR = BASE_DIR / "assets" / "user.png"
+ASSISTANT_AVATAR = BASE_DIR / "assets" / "surehealth.png"
 
 # ==========================================================
 # Page Configuration
@@ -12,7 +15,7 @@ def configure_page() -> None:
 
     st.set_page_config(
         page_title="SureHealth Pharmacy Assistant",
-        page_icon="⚕️",
+        page_icon= {ASSISTANT_AVATAR},
         layout="wide",
         initial_sidebar_state="expanded",
     )
@@ -85,7 +88,7 @@ def render_header() -> None:
     st.markdown(
         """
         <div class="app-title">
-            ⚕️ SureHealth Pharmacy Assistant
+        f"{ASSISTANT_AVATAR} SureHealth Assistant"
         </div>
         """,
         unsafe_allow_html=True,
