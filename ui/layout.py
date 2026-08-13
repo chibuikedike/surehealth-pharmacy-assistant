@@ -120,7 +120,27 @@ def load_css() -> None:
             }
 
         }
-
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 5px 0 15px 0;
+        }
+        
+        .sidebar-logo {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            display: block;
+            flex-shrink: 0;
+        }
+        
+        .sidebar-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
 
         /* ==================================================
            Footer
