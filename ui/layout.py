@@ -5,14 +5,12 @@ import streamlit as st
 # Page Configuration
 # ==========================================================
 
-
+ base_dir = Path(__file__).resolve().parent.parent
+ logo_path = base_dir / "assets" / "surehealth.png"
 def configure_page() -> None:
     """
     Configure the Streamlit page.
     """
-
-    base_dir = Path(__file__).resolve().parent.parent
-    logo_path = base_dir / "assets" / "surehealth.png"
 
     st.set_page_config(
         page_title="SureHealth Pharmacy Assistant",
