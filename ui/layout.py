@@ -46,6 +46,7 @@ def load_css() -> None:
             padding-top: 2rem;
             padding-bottom: 2rem;
             max-width: 1200px;
+            overflow: visible;
         }
       
         
