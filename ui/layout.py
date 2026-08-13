@@ -88,7 +88,7 @@ def render_header() -> None:
     with col1:
         st.image(
             str(logo_path),
-            width=50,
+            width=20,
         )
 
     with col2:
@@ -101,14 +101,7 @@ def render_header() -> None:
             unsafe_allow_html=True,
         )
 
-    st.markdown(
-        """
-        <div class="app-subtitle">
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
+    
     st.divider()
 
 
