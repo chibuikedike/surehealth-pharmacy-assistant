@@ -242,12 +242,12 @@ class LLMService:
     def _run_tool(self, tool_call,):
          tool_name = tool_call.function.name
 
-        tool = self.registry.get(tool_name)
+         tool = self.registry.get(tool_name)
 
-        arguments = self._parse_tool_arguments(
+         arguments = self._parse_tool_arguments(
         tool_call)
 
-        is_valid, reason = self.validator.validate(
+         is_valid, reason = self.validator.validate(
         tool_name,
         arguments,)
 
