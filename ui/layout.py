@@ -83,12 +83,12 @@ def render_header() -> None:
     """
     Display application header.
     """
-    col1, col2 = st.columns([1, 5])
+    col1, col2 = st.columns([1, 50])
 
     with col1:
         st.image(
             str(logo_path),
-            width=20,
+            width=70,
         )
 
     with col2:
