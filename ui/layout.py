@@ -50,8 +50,8 @@ def load_css() -> None:
 
         .app-title {
             font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 0;
+            font-weight: 500;
+            margin-bottom: 5;
         }
 
         .app-subtitle {
