@@ -38,7 +38,6 @@ def render_sidebar(
                     src="data:image/png;base64,{logo_base64}"
                     class="sidebar-logo"
                 >
-
                 <div class="sidebar-title">
                     SureHealth Pharmacy Assistant
                 </div>
