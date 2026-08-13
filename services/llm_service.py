@@ -239,36 +239,30 @@ class LLMService:
 
         return final_response.content or ""
 
-   def _run_tool(
-    self,
-    tool_call,
-   ):
-    tool_name = tool_call.function.name
+    def _run_tool(self, tool_call,):
+         tool_name = tool_call.function.name
 
-    tool = self.registry.get(tool_name)
+        tool = self.registry.get(tool_name)
 
-    arguments = self._parse_tool_arguments(
-        tool_call
-    )
+        arguments = self._parse_tool_arguments(
+        tool_call)
 
-    is_valid, reason = self.validator.validate(
+        is_valid, reason = self.validator.validate(
         tool_name,
-        arguments,
-    )
+        arguments,)
 
-    if not is_valid:
+        if not is_valid:
+            return {
+                "success": False,
+                "error": reason,
+                "tool": tool_name,}
+
+        result = tool(**arguments)
+
         return {
-            "success": False,
-            "error": reason,
-            "tool": tool_name,
+            "success": True,
+            "data": result,
         }
-
-    result = tool(**arguments)
-
-    return {
-        "success": True,
-        "data": result,
-    }
 
     # -----------------------------------------------------
 
