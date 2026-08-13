@@ -42,7 +42,6 @@ def load_css() -> None:
             visibility: hidden;
         }
 
-
         .block-container {
             padding-top: 2rem;
             padding-bottom: 2rem;
@@ -76,7 +75,6 @@ def load_css() -> None:
             padding-bottom: 10px;
             font-size: 0.85rem;
         }
-
         </style>
         """,
         unsafe_allow_html=True,
@@ -103,7 +101,6 @@ def render_header() -> None:
                 src="data:image/png;base64,{logo_base64}"
                 class="app-logo"
             >
-
             <div class="app-title">
                 SureHealth Assistant
             </div>
