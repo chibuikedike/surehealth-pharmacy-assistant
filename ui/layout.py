@@ -84,15 +84,23 @@ def render_header() -> None:
     """
     Display application header.
     """
+    col1, col2 = st.columns([1, 10])
 
-    st.markdown(
-        """
-        <div class="app-title">
-         SureHealth Assistant
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    with col1:
+        st.image(
+            str(logo_path),
+            width=55,
+        )
+
+    with col2:
+        st.markdown(
+            """
+            <div class="app-title">
+                SureHealth Assistant
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
     st.markdown(
         """
