@@ -88,7 +88,7 @@ def render_header() -> None:
     with col1:
         st.image(
             str(logo_path),
-            width=55,
+            width=50,
         )
 
     with col2:
