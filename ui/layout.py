@@ -1,4 +1,5 @@
 from pathlib import Path
+import base64
 import streamlit as st
 
 base_dir = Path(__file__).resolve().parent
@@ -47,20 +48,27 @@ def load_css() -> None:
             padding-bottom: 2rem;
             max-width: 1200px;
         }
-
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .app-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        
         .app-title {
             font-size: 2.2rem;
-            font-weight: 500;
-            margin-bottom: 5;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.2;
         }
-
-        .app-subtitle {
-            color: gray;
-            font-size: 1rem;
-            margin-top: -8px;
-            margin-bottom: 30px;
-        }
-
+       
         .footer {
             text-align: center;
             color: gray;
@@ -79,29 +87,35 @@ def load_css() -> None:
 # Header
 # ==========================================================
 
+
 def render_header() -> None:
     """
     Display application header.
     """
-    col1, col2 = st.columns([1, 50])
 
-    with col1:
-        st.image(
-            str(logo_path),
-            width=70,
-        )
+    base_dir = Path(__file__).resolve().parent.parent
+    logo_path = base_dir / "assets" / "surehealth.png"
 
-    with col2:
-        st.markdown(
-            """
+    logo_base64 = base64.b64encode(
+        logo_path.read_bytes()
+    ).decode()
+
+    st.markdown(
+        f"""
+        <div class="app-header">
+            <img
+                src="data:image/png;base64,{logo_base64}"
+                class="app-logo"
+            >
+
             <div class="app-title">
                 SureHealth Assistant
             </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-    
     st.divider()
 
 
