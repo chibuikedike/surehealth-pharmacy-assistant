@@ -242,7 +242,7 @@ class LLMService:
    def _run_tool(
     self,
     tool_call,
-):
+   ):
     tool_name = tool_call.function.name
 
     tool = self.registry.get(tool_name)
