@@ -92,10 +92,6 @@ def render_header() -> None:
     """
     Display application header.
     """
-
-    base_dir = Path(__file__).resolve().parent.parent
-    logo_path = base_dir / "assets" / "surehealth.png"
-
     logo_base64 = base64.b64encode(
         logo_path.read_bytes()
     ).decode()
