@@ -83,7 +83,7 @@ def render_header() -> None:
     """
     Display application header.
     """
-    col1, col2 = st.columns([1, 10])
+    col1, col2 = st.columns([1, 5])
 
     with col1:
         st.image(
