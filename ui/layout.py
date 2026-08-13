@@ -47,16 +47,18 @@ def load_css() -> None:
             padding-bottom: 2rem;
             max-width: 1200px;
         }
+      
+        
         .app-header {
             display: flex;
             align-items: center;
-            gap: 14px;
-            margin-bottom: 15px;
+            gap: 18px;
+            width: 100%;
         }
         
         .app-logo {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             object-fit: contain;
             flex-shrink: 0;
         }
@@ -64,9 +66,27 @@ def load_css() -> None:
         .app-title {
             font-size: 2.2rem;
             font-weight: 700;
+            line-height: 1.15;
             margin: 0;
-            line-height: 1.2;
+            padding: 0;
         }
+        
+        @media (max-width: 768px) {
+        
+            .app-header {
+                gap: 12px;
+                align-items: center;
+            }
+        
+            .app-logo {
+                width: 60px;
+                height: 60px;
+            }
+        
+            .app-title {
+                font-size: 1.7rem;
+                line-height: 1.15;
+            }
        
         .footer {
             text-align: center;
