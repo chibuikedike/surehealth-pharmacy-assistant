@@ -251,15 +251,15 @@ class LLMService:
         tool_name,
         arguments,)
 
-        if not is_valid:
+         if not is_valid:
             return {
                 "success": False,
                 "error": reason,
                 "tool": tool_name,}
 
-        result = tool(**arguments)
+         result = tool(**arguments)
 
-        return {
+         return {
             "success": True,
             "data": result,
         }
