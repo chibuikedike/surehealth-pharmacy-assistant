@@ -1,6 +1,7 @@
 
 from __future__ import annotations
 from pathlib import Path
+import base64
 import streamlit as st
 
 from models.chat_session import ChatSession
