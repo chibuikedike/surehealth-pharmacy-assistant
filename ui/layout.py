@@ -71,12 +71,12 @@ def load_css() -> None:
             padding: 0;
         }
         
-        @media (max-width: 768px) {
-        
-            .app-header {
-                gap: 12px;
-                align-items: center;
+       @media (max-width: 768px) {
+            .app-title {
+                font-size: 1.35rem;
+                white-space: nowrap;
             }
+          }
         
             .app-logo {
                 width: 60px;
