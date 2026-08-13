@@ -1,12 +1,13 @@
 from pathlib import Path
 import streamlit as st
 
+base_dir = Path(__file__).resolve().parent.parent
+logo_path = base_dir / "assets" / "surehealth.png"
+
 # ==========================================================
 # Page Configuration
 # ==========================================================
 
- base_dir = Path(__file__).resolve().parent.parent
- logo_path = base_dir / "assets" / "surehealth.png"
 def configure_page() -> None:
     """
     Configure the Streamlit page.
