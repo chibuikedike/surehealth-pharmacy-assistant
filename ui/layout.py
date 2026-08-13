@@ -1,21 +1,25 @@
+from pathlib import Path
 import streamlit as st
 
 # ==========================================================
 # Page Configuration
 # ==========================================================
 
+
 def configure_page() -> None:
     """
     Configure the Streamlit page.
     """
 
+    base_dir = Path(__file__).resolve().parent.parent
+    logo_path = base_dir / "assets" / "surehealth.png"
+
     st.set_page_config(
         page_title="SureHealth Pharmacy Assistant",
-        page_icon= "/assets/surehealth.png,
+        page_icon=str(logo_path),
         layout="wide",
         initial_sidebar_state="expanded",
     )
-
 
 # ==========================================================
 # Styling
